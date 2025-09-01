@@ -29,21 +29,36 @@ export default function PokemonDetails({
 								<ArrowLeft className="h-5 w-5" />
 								<div className="text-sm">Back</div>
 							</Link>
-							<div className="flex items-center gap-2">
-								<Zap className="h-6 w-6 text-yellow-500" />
-								<div className="flex items-end  gap-2">
-									<div className="bg-gradient-to-r bg-clip-text text-transparent text-3xl font-bold from-blue-600 to-purple-600">
-										{pokemonDetails
-											? formatPokemonName(pokemonDetails.name)
-											: "loading..."}
+							{/* Pokemon name and number */}
+
+							<div>
+								{isLoadingDetails ? (
+									<div className="text-muted-foreground">
+										Loading Pokémon...
 									</div>
-									<div className="text-lg font-normal text-muted-foreground">
-										#
-										{pokemonDetails
-											? pokemonDetails.id.toString().padStart(3, "0")
-											: "???"}
+								) : pokemonDetails ? (
+									<div className="flex items-center gap-2">
+										<Zap className="h-6 w-6 text-yellow-500" />
+										<div className="flex items-end  gap-2">
+											<div className="bg-gradient-to-r bg-clip-text text-transparent text-3xl font-bold from-blue-600 to-purple-600">
+												{pokemonDetails
+													? formatPokemonName(pokemonDetails.name)
+													: "loading..."}
+											</div>
+											<div className="text-lg font-normal text-muted-foreground">
+												#
+												{pokemonDetails
+													? pokemonDetails.id.toString().padStart(3, "0")
+													: "???"}
+											</div>
+										</div>
 									</div>
-								</div>
+								) : (
+									<div>
+										⚠ Loading Pokémon name returned error
+										{errorDetails.message && ": " + errorDetails.message}
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

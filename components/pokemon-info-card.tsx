@@ -9,7 +9,7 @@ import {
 	getTypeColor,
 } from "@/lib/pokemon-utils";
 import { Pokemon } from "@/types/pokemon";
-import { Loader, TriangleAlert } from "lucide-react";
+import { Loader } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -80,15 +80,17 @@ export function PokemonInfoCard({
 							/>
 						) : (
 							<div className="flex items-center justify-center h-full gap-2">
-								<TriangleAlert />
-								<div>Pokemon image failed to load.</div>
+								<div>⚠ Failed to load Pokémon image</div>
 							</div>
 						)}
 					</div>
 					{isLoadingDetails ? (
 						<LoadingDetails />
 					) : !pokemonDetails ? (
-						<div>Error: {errorDetails.message}</div>
+						<div>
+							⚠ Loading Pokémon details returned error
+							{errorDetails.message && ": " + errorDetails.message}
+						</div>
 					) : (
 						<div>
 							{/* Pokemon Height and Weight */}
@@ -120,7 +122,7 @@ export function PokemonInfoCard({
 							<div className="flex justify-center items-center gap-3 mb-7">
 								{pokemonDetails.types &&
 									pokemonDetails.types.map((slot) => (
-										/* note the data structure returned by the Pokemon API, each "slot" contains 1 type */
+										/* mind the data structure returned by the Pokemon API, each "slot" contains 1 type */
 										<Badge
 											key={slot.slot}
 											className="text-base font-medium text-white px-5 py-2"
