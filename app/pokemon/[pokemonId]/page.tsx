@@ -7,7 +7,7 @@ import { ArrowLeft, Zap } from "lucide-react";
 import Link from "next/link";
 
 //dynamic routing with pokemon id as parameter
-export default function pokemonDetails({
+export default function PokemonDetails({
 	params,
 }: {
 	params: { pokemonId: number };
