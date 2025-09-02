@@ -45,19 +45,36 @@ export default function EnhancedPreview({ pokemonId }: EnhancedPreviewProps) {
 							<div className="text-sm font-medium text-gray-600 mb-1">
 								Abilities
 							</div>
-							<div className="flex flex-wrap justify-center items-center gap-2 mb-1">
-								{pokemonDetails.abilities &&
-									pokemonDetails.abilities.map((ability) => (
-										<Badge
-											key={
-												ability.slot
-											} /* mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 ability */
-											className="text-xs border-gray-300 text-gray-700 px-3 py-1 transition-all duration-300 hover:border-blue-400 hover:text-blue-600 truncate"
-											variant="outline"
-										>
-											{formatPokemonName(ability.ability.name)}
-										</Badge>
-									))}
+							<div
+								className="flex flex-wrap justify-center items-center gap-2 mb-1"
+								/* flex-wrap is used to allow ability badges to wrap onto multiple lines to allow enough space for each badge to display the entire name */
+							>
+								{pokemonDetails.abilities && (
+									<>
+										{/* including only the first 2 abilities */}
+										{pokemonDetails.abilities.slice(0, 2).map((ability) => (
+											<Badge
+												key={
+													ability.slot
+												} /* mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 ability */
+												className="text-xs border-gray-300 text-gray-700 px-3 py-1 transition-all duration-300 hover:border-blue-400 hover:text-blue-600 truncate"
+												variant="outline"
+											>
+												{formatPokemonName(ability.ability.name)}
+											</Badge>
+										))}
+										{/* handle "+X more" badge below */}
+										{pokemonDetails.abilities.length - 2 > 0 && (
+											<Badge
+												key={"more"}
+												className="text-xs border-gray-300 text-gray-700 px-3 py-1 truncate"
+												variant="outline"
+											>
+												+{pokemonDetails.abilities.length - 2} more
+											</Badge>
+										)}
+									</>
+								)}
 							</div>
 						</div>
 					</div>
