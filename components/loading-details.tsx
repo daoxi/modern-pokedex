@@ -8,7 +8,7 @@ export function LoadingDetails() {
 			{/* Pokemon Height and Weight */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-y-7 mb-7">
 				{Array.from({
-					length: 2 /* use this to repeat components/elements n times for cleaner code */,
+					length: 2 /* Use this to repeat components/elements n times for cleaner code */,
 				}).map((_, index) => (
 					<div key={index} className="flex justify-center">
 						<div className="flex flex-col justify-start items-center gap-3">
@@ -29,7 +29,7 @@ export function LoadingDetails() {
 					<div className="flex flex-col gap-5">
 						<Skeleton className="h-8 w-24" />
 						{Array.from({
-							length: 2 /* use this to repeat components/elements n times */,
+							length: 2 /* Use this to repeat components/elements n times */,
 						}).map((_, index) => (
 							<div key={index} className="flex flex-col gap-3">
 								<Skeleton className="h-4 w-16" />
@@ -47,7 +47,7 @@ export function LoadingDetails() {
 				</div>
 				<div className="flex flex-col gap-6">
 					{Array.from({
-						length: 6 /* use this to repeat components/elements n times */,
+						length: 6 /* Use this to repeat components/elements n times */,
 					}).map((_, index) => (
 						<div key={index}>
 							<Skeleton className="h-4 w-full" />

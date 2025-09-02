@@ -28,7 +28,7 @@ export function PokemonInfoCard({
 	isLoadingDetails,
 	errorDetails,
 }: PokemonInfoCardProps) {
-	//initialize and manage image load states
+	// Initialize and manage image load states
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const [imageError, setImageError] = useState(false);
 
@@ -57,19 +57,19 @@ export function PokemonInfoCard({
 						)}
 						<div
 							className={`absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full ${
-								imageLoaded && !imageError ? "opacity-100" : "opacity-0" //only display background when image loaded successfully
+								imageLoaded && !imageError ? "opacity-100" : "opacity-0" // Only display background when image loaded successfully
 							}`}
 						/>
 						{!imageError ? (
 							<Image
-								src={getPokemonImageUrl(pokemonId)} //pokemon image can be loaded before pokemon details are ready, thanks to pokemon ID obtained from route parameters
+								src={getPokemonImageUrl(pokemonId)} // Pokemon image can be loaded before pokemon details are ready, thanks to pokemon ID obtained from route parameters
 								alt={formatPokemonName(
 									pokemonDetails ? pokemonDetails.name : "pokemon"
 								)}
-								priority // used for Largest Contentful Paint (LCP)
+								priority // Used for Largest Contentful Paint (LCP)
 								fill
 								sizes="(max-width: 475px) 100vw"
-								//unoptimized
+								//unoptimized // Used if need to serve the image as-is (i.e. without converting)
 								className={`object-contain transition-all duration-300 ${
 									imageLoaded ? "opacity-100" : "opacity-0"
 								}`}
@@ -100,7 +100,7 @@ export function PokemonInfoCard({
 										{
 											pokemonDetails.height
 												? pokemonDetails.height / 10
-												: "?" /* consider height might not always be known */
+												: "?" /* Consider height might not always be known */
 										}{" "}
 										m
 									</div>
@@ -111,7 +111,7 @@ export function PokemonInfoCard({
 										{
 											pokemonDetails.weight
 												? pokemonDetails.weight / 10
-												: "?" /* consider weight might not always be known */
+												: "?" /* Consider weight might not always be known */
 										}{" "}
 										kg
 									</div>
@@ -124,7 +124,7 @@ export function PokemonInfoCard({
 										<Badge
 											key={
 												type.slot
-											} /* mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 type */
+											} /* Mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 type */
 											className="text-base font-medium text-white px-5 py-2"
 											style={{
 												backgroundColor: getTypeColor(type.type.name),

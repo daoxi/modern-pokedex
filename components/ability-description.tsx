@@ -14,7 +14,7 @@ export function AbilityDescription({
 	isLoadingDetails,
 	errorDetails,
 }: AbilityDescriptionProps) {
-	//use the custom hook to get ability details
+	// Use the custom hook to get ability details
 	const { abilityDetails, isLoadingAbility, errorAbility } =
 		useAbilityDetails(abilityName);
 
@@ -32,7 +32,7 @@ export function AbilityDescription({
 						<Skeleton className="h-4 w-full" />
 					) : abilityDetails ? (
 						abilityDetails.effect_entries.find(
-							(entry) => entry.language.name === "en" //check English description is available
+							(entry) => entry.language.name === "en" // Check English description is available
 						) ? (
 							abilityDetails.effect_entries.find(
 								(entry) => entry.language.name === "en"
@@ -46,7 +46,7 @@ export function AbilityDescription({
 							{errorAbility.message}
 						</div>
 					) : abilityDetails ===
-					  null /* abilityDetails being null implies 404 error due to how getAbilityDetails is designed */ ? (
+					  null /* AbilityDetails being null implies 404 error due to how getAbilityDetails is designed */ ? (
 						<div>⚠ Loading ability description returned error: 404</div>
 					) : (
 						<div>⚠ Failed to load ability description.</div>

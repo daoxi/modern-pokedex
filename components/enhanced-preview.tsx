@@ -1,3 +1,5 @@
+// This includes only the enhanced preview (lower-half) part of Pokemon cards
+
 "use client";
 
 import { LoadingPreview } from "@/components/loading-preview";
@@ -9,9 +11,9 @@ interface EnhancedPreviewProps {
 	pokemonId: number;
 }
 
-//using "default" export here to facilitate lazy loading import
+// Using "default" export here to facilitate lazy loading import
 export default function EnhancedPreview({ pokemonId }: EnhancedPreviewProps) {
-	//get pokemon details with custom hook
+	// Get pokemon details with custom hook
 	const { pokemonDetails, isLoadingDetails, errorDetails } = usePokemonDetails(
 		pokemonId.toString()
 	);
@@ -30,7 +32,7 @@ export default function EnhancedPreview({ pokemonId }: EnhancedPreviewProps) {
 									<Badge
 										key={
 											type.slot
-										} /* mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 type */
+										} /* Mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 type */
 										className="text-xs font-medium text-white px-3 py-1 transition-all duration-300 hover:scale-110"
 										style={{
 											backgroundColor: getTypeColor(type.type.name),
@@ -47,23 +49,23 @@ export default function EnhancedPreview({ pokemonId }: EnhancedPreviewProps) {
 							</div>
 							<div
 								className="flex flex-wrap justify-center items-center gap-2 mb-1"
-								/* flex-wrap is used to allow ability badges to wrap onto multiple lines to allow enough space for each badge to display the entire name */
+								/* "flex-wrap" is used to allow ability badges to wrap onto multiple lines to allow enough space for each badge to display the entire name */
 							>
 								{pokemonDetails.abilities && (
 									<>
-										{/* including only the first 2 abilities */}
+										{/* Including only the first 2 abilities */}
 										{pokemonDetails.abilities.slice(0, 2).map((ability) => (
 											<Badge
 												key={
 													ability.slot
-												} /* mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 ability */
+												} /* Mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 ability */
 												className="text-xs border-gray-300 text-gray-700 px-3 py-1 transition-all duration-300 hover:border-blue-400 hover:text-blue-600 truncate"
 												variant="outline"
 											>
 												{formatPokemonName(ability.ability.name)}
 											</Badge>
 										))}
-										{/* handle "+X more" badge below */}
+										{/* Handle "+X more" badge below */}
 										{pokemonDetails.abilities.length - 2 > 0 && (
 											<Badge
 												key={"more"}

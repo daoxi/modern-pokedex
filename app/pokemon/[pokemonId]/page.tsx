@@ -6,13 +6,13 @@ import { formatPokemonName } from "@/lib/pokemon-utils";
 import { ArrowLeft, Zap } from "lucide-react";
 import Link from "next/link";
 
-//dynamic routing with pokemon id as parameter
+// Dynamic routing with pokemon id as parameter
 export default function PokemonDetails({
 	params,
 }: {
 	params: { pokemonId: number };
 }) {
-	//get pokemon details with custom hook
+	// Get pokemon details with custom hook
 	const { pokemonDetails, isLoadingDetails, errorDetails } = usePokemonDetails(
 		params.pokemonId.toString()
 	);

@@ -18,7 +18,7 @@ export function PokemonInfo({
 	isLoadingDetails,
 	errorDetails,
 }: PokemonInfoProps) {
-	//use custom hook to get ability details (after pokemon details are ready)
+	// Use custom hook to get ability details (after pokemon details are ready)
 	const { abilityDetails, isLoadingAbility, errorAbility } =
 		useAbilityDetails("");
 

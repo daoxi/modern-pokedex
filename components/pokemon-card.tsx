@@ -7,7 +7,7 @@ import { formatPokemonName, getPokemonImageUrl } from "@/lib/pokemon-utils";
 import { Pokemon } from "@/types/pokemon";
 import Image from "next/image";
 import { Suspense, lazy, useState } from "react";
-// import { EnhancedPreview } from "@/components/enhanced-preview"; // replaced with lazy loading
+// import { EnhancedPreview } from "@/components/enhanced-preview"; // Replaced with lazy loading
 
 interface PokemonCardProps {
 	pokemon: Pokemon;
@@ -27,7 +27,7 @@ export function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
 		setImageLoaded(true);
 	};
 
-	//implement lazy loading to improve performance and limit unnecessary API calls
+	// Implement lazy loading to improve performance and limit unnecessary API calls
 	const EnhancedPreview = lazy(() => import("@/components/enhanced-preview"));
 
 	return (
