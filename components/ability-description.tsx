@@ -22,7 +22,7 @@ export function AbilityDescription({
 		<>
 			<div>
 				{isLoadingDetails ? (
-					<div>Loading Pokémon details..."</div>
+					<div>Loading Pokémon details...</div>
 				) : errorDetails ? (
 					<div>
 						⚠ Loading Pokémon details returned error: {errorDetails.message}
