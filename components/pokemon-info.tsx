@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { useAbilityDetails } from "@/hooks/use-ability-details";
 import { formatPokemonName } from "@/lib/pokemon-utils";
 import { Pokemon } from "@/types/pokemon";
+
 interface PokemonInfoProps {
 	pokemonDetails: Pokemon;
 	isLoadingDetails: boolean;
@@ -17,12 +18,13 @@ export function PokemonInfo({
 	isLoadingDetails,
 	errorDetails,
 }: PokemonInfoProps) {
+	//use custom hook to get ability details (after pokemon details are ready)
 	const { abilityDetails, isLoadingAbility, errorAbility } =
 		useAbilityDetails("");
 
 	return (
 		<>
-			{/* Pokemon Details */}
+			{/* Pokemon Extra Details (within Tabs) e.g. Stats and Charts */}
 			{/* Pokemon Abilities */}
 			<div className="mb-6">
 				<div className="text-xl font-semibold text-gray-800 mb-4">

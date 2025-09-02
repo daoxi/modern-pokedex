@@ -30,7 +30,6 @@ export default function PokemonDetails({
 								<div className="text-sm">Back</div>
 							</Link>
 							{/* Pokemon name and number */}
-
 							<div>
 								{isLoadingDetails ? (
 									<div className="text-muted-foreground">
@@ -63,8 +62,8 @@ export default function PokemonDetails({
 						</div>
 					</div>
 				</div>
-				{/* Card section */}
 
+				{/* Card section */}
 				<div className="flex justify-center items-start px-3 py-6">
 					<PokemonInfoCard
 						pokemonId={params.pokemonId}

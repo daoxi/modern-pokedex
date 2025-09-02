@@ -1,5 +1,6 @@
 "use client";
 
+import { PokemonInfo } from "@/components/pokemon-info";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -12,8 +13,6 @@ import { Pokemon } from "@/types/pokemon";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-
-import { PokemonInfo } from "@/components/pokemon-info";
 import { LoadingDetails } from "./loading-details";
 
 interface PokemonInfoCardProps {
@@ -56,7 +55,6 @@ export function PokemonInfoCard({
 								</div>
 							</>
 						)}
-
 						<div
 							className={`absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full ${
 								imageLoaded && !imageError ? "opacity-100" : "opacity-0" //only display background when image loaded successfully
@@ -71,7 +69,7 @@ export function PokemonInfoCard({
 								priority // used for Largest Contentful Paint (LCP)
 								fill
 								sizes="(max-width: 475px) 100vw"
-								//unoptimized // don't resize
+								//unoptimized
 								className={`object-contain transition-all duration-300 ${
 									imageLoaded ? "opacity-100" : "opacity-0"
 								}`}
@@ -84,6 +82,7 @@ export function PokemonInfoCard({
 							</div>
 						)}
 					</div>
+					{/* Pokemon Details and More */}
 					{isLoadingDetails ? (
 						<LoadingDetails />
 					) : !pokemonDetails ? (

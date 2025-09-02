@@ -1,7 +1,7 @@
 "use client";
 
+import { Skeleton } from "@/components//ui/skeleton";
 import { useAbilityDetails } from "@/hooks/use-ability-details";
-import { Skeleton } from "./ui/skeleton";
 
 interface AbilityDescriptionProps {
 	abilityName: string;
@@ -32,7 +32,7 @@ export function AbilityDescription({
 						<Skeleton className="h-4 w-full" />
 					) : abilityDetails ? (
 						abilityDetails.effect_entries.find(
-							(entry) => entry.language.name === "en" //first check English description is available
+							(entry) => entry.language.name === "en" //check English description is available
 						) ? (
 							abilityDetails.effect_entries.find(
 								(entry) => entry.language.name === "en"

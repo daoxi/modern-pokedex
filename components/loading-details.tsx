@@ -22,7 +22,7 @@ export function LoadingDetails() {
 			<div className="flex justify-center items-center gap-3 mb-7">
 				<Skeleton className="h-8 w-24" />
 			</div>
-			{/* Pokemon Details */}
+			{/* Pokemon Details and more */}
 			{/* Pokemon Abilities */}
 			<div className="mb-7">
 				<div className="mb-4">
