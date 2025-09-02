@@ -1,11 +1,13 @@
 "use client";
 
+import { LoadingPreview } from "@/components/loading-preview";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatPokemonName, getPokemonImageUrl } from "@/lib/pokemon-utils";
 import { Pokemon } from "@/types/pokemon";
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
+// import { EnhancedPreview } from "@/components/enhanced-preview"; // replaced with lazy loading
 
 interface PokemonCardProps {
 	pokemon: Pokemon;
@@ -24,6 +26,9 @@ export function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
 		setImageError(true);
 		setImageLoaded(true);
 	};
+
+	//implement lazy loading to improve performance and limit unnecessary API calls
+	const EnhancedPreview = lazy(() => import("@/components/enhanced-preview"));
 
 	return (
 		<Card
@@ -67,6 +72,11 @@ export function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
 					<h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-200">
 						{formatPokemonName(pokemon.name)}
 					</h3>
+
+					{/* Pokemon Enhanced Preview */}
+					<Suspense fallback={<LoadingPreview />}>
+						<EnhancedPreview pokemonId={pokemon.id} />
+					</Suspense>
 				</div>
 			</CardContent>
 		</Card>

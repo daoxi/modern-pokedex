@@ -120,16 +120,17 @@ export function PokemonInfoCard({
 							{/* Pokemon Type(s) */}
 							<div className="flex justify-center items-center gap-3 mb-7">
 								{pokemonDetails.types &&
-									pokemonDetails.types.map((slot) => (
-										/* mind the data structure returned by the Pokemon API, each "slot" contains 1 type */
+									pokemonDetails.types.map((type) => (
 										<Badge
-											key={slot.slot}
+											key={
+												type.slot
+											} /* mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 type */
 											className="text-base font-medium text-white px-5 py-2"
 											style={{
-												backgroundColor: getTypeColor(slot.type.name),
+												backgroundColor: getTypeColor(type.type.name),
 											}}
 										>
-											{formatPokemonName(slot.type.name)}
+											{formatPokemonName(type.type.name)}
 										</Badge>
 									))}
 							</div>
