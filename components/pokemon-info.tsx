@@ -134,8 +134,6 @@ export function PokemonInfo({
 						<TabsContent value="tab-2">
 							<StatsChart
 								pokemonDetails={pokemonDetails}
-								isLoadingDetails={isLoadingDetails}
-								errorDetails={errorDetails}
 								selectedAbility={selectedAbility}
 								handleClickAbility={handleClickAbility}
 							/>

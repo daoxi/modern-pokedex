@@ -19,33 +19,24 @@ import {
 	Rectangle,
 	ResponsiveContainer,
 	Tooltip,
-	TooltipProps,
 	XAxis,
 	YAxis,
 } from "recharts";
-import {
-	NameType,
-	ValueType,
-} from "recharts/types/component/DefaultTooltipContent";
 
 interface StatsChartProps {
 	pokemonDetails: Pokemon; // Error handling for pokemonDetails has already been done in the parent component, so this can't be null or undefined
-	isLoadingDetails: boolean;
-	errorDetails: any;
 	selectedAbility: string;
 	handleClickAbility: (name: string) => void;
 }
 
 export function StatsChart({
 	pokemonDetails,
-	isLoadingDetails,
-	errorDetails,
 	selectedAbility,
 	handleClickAbility,
 }: StatsChartProps) {
 	const pokemonStats: { name: string; statBase: number; statMod: number }[] =
 		[];
-
+	// Construct the array for storing both base stats and modified stats
 	if (pokemonDetails.stats) {
 		pokemonDetails.stats.forEach((stat) => {
 			pokemonStats.push({
@@ -73,52 +64,13 @@ export function StatsChart({
 
 	const netChange = modTotal - baseTotal;
 
-	// Data example from Recharts official example
-	const data = [
-		{
-			name: "Page A",
-			uv: 4000,
-			pv: 2400,
-		},
-		{
-			name: "Page B",
-			uv: 3000,
-			pv: 1398,
-		},
-		{
-			name: "Page C",
-			uv: 2000,
-			pv: 9800,
-		},
-		{
-			name: "Page D",
-			uv: 2780,
-			pv: 3908,
-		},
-		{
-			name: "Page E",
-			uv: 1890,
-			pv: 4800,
-		},
-		{
-			name: "Page F",
-			uv: 2390,
-			pv: 3800,
-		},
-		{
-			name: "Page G",
-			uv: 3490,
-			pv: 4300,
-		},
-	];
-
 	// This includes all of the content displayed on the tooltip, completely overrides the default tooltip
 	const CustomTooltip = (
 		{
 			active,
 			payload,
 			label,
-		}: TooltipProps<ValueType, NameType> /* Using types provided by Recharts */
+		}: any /* Consider using types provided by Recharts: "TooltipProps<ValueType, NameType>" */
 	) => {
 		const isVisible = active && payload && payload.length; // Controls visibility of the tooltip, referenced from Recharts site
 		return (
@@ -139,38 +91,29 @@ export function StatsChart({
 								<div className="font-medium">{payload[1].value}</div>
 							</div>
 
-							{(payload[1].value as number) - (payload[0].value as number) !=
-								0 && (
+							{payload[1].value - payload[0].value != 0 && (
 								/* hide this part if there's no stat change */
 								<div className="flex justify-between mb-1">
 									<div className="text-gray-600">Change: </div>
 									<div
 										className={`flex justify-end gap-1 font-medium ${
-											(payload[1].value as number) -
-												(payload[0].value as number) >
-											0
+											payload[1].value - payload[0].value > 0
 												? "text-green-600"
 												: "text-red-600"
 											/* Doesn't need to consider when there's 0 change, because then this part won't be rendered */
 										}`}
 									>
 										<div>
-											{(payload[1].value as number) -
-												(payload[0].value as number) >
-												0 && "+"}
-											{(payload[1].value as number) -
-												(payload[0].value as number)}
+											{payload[1].value - payload[0].value > 0 && "+"}
+											{payload[1].value - payload[0].value}
 										</div>
 										<div>
 											{"("}
-											{(payload[1].value as number) -
-												(payload[0].value as number) >
-												0 && "+"}
+											{payload[1].value - payload[0].value > 0 && "+"}
 											{
 												Math.round(
-													(((payload[1].value as number) -
-														(payload[0].value as number)) /
-														(payload[0].value as number)) *
+													((payload[1].value - payload[0].value) /
+														payload[0].value) *
 														100
 												) /* convert for percentage display*/
 											}
@@ -179,16 +122,15 @@ export function StatsChart({
 									</div>
 								</div>
 							)}
-
 							<Separator className="my-2" />
-
+							{/* Ability Effect */}
 							<div className="flex gap-1 items-center text-xs text-gray-600">
 								<Info className="h-3 w-3" />
 								{
 									calculateAbilityEffect(
 										selectedAbility,
 										label,
-										payload[0].value as number
+										payload[0].value
 									).effect
 								}
 							</div>
@@ -207,7 +149,7 @@ export function StatsChart({
 			y,
 			stroke,
 			payload,
-		}: any /* Did not find a suitable type for props provided by Recharts (similar to TooltipProps), consider manual typing later */
+		}: any /* Did not find a suitable type for props provided by Recharts (similar to TooltipProps), consider manual typing */
 	) => {
 		return (
 			<g transform={`translate(${x},${y})`}>
@@ -300,6 +242,7 @@ export function StatsChart({
 					</div>
 				</CardContent>
 			</Card>
+			{/* Stats Chart */}
 			<div className="container h-[320px] mb-16">
 				<ResponsiveContainer width="100%" height="100%">
 					<BarChart
@@ -320,7 +263,7 @@ export function StatsChart({
 							}
 							height={
 								105
-							} /* Bump X-axis up to avoid X-axis angled texts overlapping with the legend, this method is used in Recharts' official example */
+							} /* Bump X-axis up to avoid X-axis angled texts overlapping with the legend, this approach is used in Recharts' official example */
 							interval={0} // Use this to always show all ticks (i.e. X-axis texts) even on the narrowest screen
 						/>
 						<YAxis
@@ -352,6 +295,7 @@ export function StatsChart({
 					</BarChart>
 				</ResponsiveContainer>
 			</div>
+			{/* Stats Summary Cards */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center font-bold mb-6">
 				<Card className="bg-blue-50 border-none">
 					<CardContent className="py-4">
@@ -384,6 +328,7 @@ export function StatsChart({
 					</CardContent>
 				</Card>
 			</div>
+			{/* Addtional Note */}
 			<div className="text-xs text-gray-400">
 				<b>Note:</b> Ability effects shown are theoretical and may depend on
 				battle conditions, status effects, weather, or other factors not
