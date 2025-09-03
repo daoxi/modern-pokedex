@@ -34,7 +34,7 @@ export function LoadingDetails() {
 					<div className="flex flex-col gap-5">
 						<Skeleton className="h-8 w-24" />
 						{Array.from({
-							length: 2 /* Use this to repeat components/elements n times */,
+							length: 2 /* repeat n times */,
 						}).map((_, index) => (
 							<div key={index} className="flex flex-col gap-3">
 								<Skeleton className="h-4 w-16" />
@@ -52,7 +52,7 @@ export function LoadingDetails() {
 				</div>
 				<div className="flex flex-col gap-6">
 					{Array.from({
-						length: 6 /* Use this to repeat components/elements n times */,
+						length: 6 /* repeat n times */,
 					}).map((_, index) => (
 						<div key={index}>
 							<Skeleton className="h-4 w-full" />

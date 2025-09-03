@@ -1,3 +1,5 @@
+// This component contains everything in the "Stats Chart" tab
+
 "use client";
 
 import { Pokemon } from "@/types/pokemon";
@@ -34,9 +36,10 @@ export function StatsChart({
 	selectedAbility,
 	handleClickAbility,
 }: StatsChartProps) {
+	// The array for storing both base stats and modified stats
 	const pokemonStats: { name: string; statBase: number; statMod: number }[] =
 		[];
-	// Construct the array for storing both base stats and modified stats
+	// Construct said array
 	if (pokemonDetails.stats) {
 		pokemonDetails.stats.forEach((stat) => {
 			pokemonStats.push({
@@ -149,7 +152,7 @@ export function StatsChart({
 			y,
 			stroke,
 			payload,
-		}: any /* Did not find a suitable type for props provided by Recharts (similar to TooltipProps), consider manual typing */
+		}: any /* Did not find a suitable type for props provided by Recharts (similar to TooltipProps), consider manual typing instead */
 	) => {
 		return (
 			<g transform={`translate(${x},${y})`}>
@@ -160,7 +163,7 @@ export function StatsChart({
 					textAnchor="end"
 					fill="#6B7280" // Use this to change the X-axis text color
 					transform="rotate(-35)"
-					className="text-sm font-medium" // "text-gray-700" for "Stat Labels" is not included because the "fill" prop is already used to color the SVG text
+					className="text-sm font-medium" // "text-gray-700" for "Stat Labels" is excluded because the "fill" prop is already used to color the SVG text
 				>
 					{
 						formatPokemonName(
@@ -249,14 +252,14 @@ export function StatsChart({
 						data={pokemonStats}
 						margin={{
 							top: 0,
-							left: 2, // Needs a tiny bit of margin for the rotated Y-axis label text to not be partially cropped out
+							left: 2, // Needs a tiny bit of margin for the rotated Y-axis label text to not be partially/slightly cropped out
 							right: 2, // Symmetrical to the left
 							bottom: 0,
 						}}
 					>
 						<CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
 						<XAxis
-							//angle={-45} // Rotates texts without adjusting position accordingly, which causes those texts to overlap with chart, thus not useful for texts.
+							//angle={-45} // This rotates texts without adjusting position accordingly, which causes those texts to overlap with chart, thus not useful for texts.
 							dataKey="name"
 							tick={
 								<CustomizedAxisTick /> /* Use this to customize axis texts, especially to rotate them */
@@ -284,13 +287,13 @@ export function StatsChart({
 							dataKey="statBase"
 							fill="#3B82F6"
 							activeBar={<Rectangle fill="blue" stroke="blue" />}
-							name="Base Stat"
+							name="Base Stat" // Component will use dataKey as name if this isn't defined
 						/>
 						<Bar
 							dataKey="statMod"
 							fill="#8B5CF6"
 							activeBar={<Rectangle fill="purple" stroke="purple" />}
-							name="Ability Modified"
+							name="Ability Modified" // Component will use dataKey as name if this isn't defined
 						/>
 					</BarChart>
 				</ResponsiveContainer>

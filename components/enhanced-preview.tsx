@@ -40,7 +40,7 @@ export default function EnhancedPreview({ pokemonId }: EnhancedPreviewProps) {
 									>
 										{formatPokemonName(type.type.name)}
 									</Badge>
-								))}{" "}
+								))}
 						</div>
 						{/* Pokemon Abilities */}
 						<div>

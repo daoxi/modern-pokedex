@@ -1,5 +1,5 @@
+import { useQuery } from "@/hooks/use-query";
 import { getPokemonDetails } from "@/lib/api";
-import { useQuery } from "./use-query";
 
 export function usePokemonDetails(nameOrId: string | null) {
 	const { data, isLoading, error } = useQuery(

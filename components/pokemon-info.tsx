@@ -1,3 +1,5 @@
+// This component contains everything within the tabbed interface (for details and stats charts, etc.)
+
 "use client";
 
 import { AbilityDescription } from "@/components/ability-description";
@@ -27,7 +29,7 @@ export function PokemonInfo({
 	const { abilityDetails, isLoadingAbility, errorAbility } =
 		useAbilityDetails("");
 
-	// This state is lifted up to this parent component in order to preserve state during component lifecycle
+	// The following state is lifted up to this parent component in order to preserve state during component lifecycle
 	// (In other words, switching tabs in <Tabs> won't reset selectedAbility)
 	const [selectedAbility, setSelectedAbility] = useState(
 		pokemonDetails.abilities ? pokemonDetails.abilities[0].ability.name : ""
@@ -131,6 +133,7 @@ export function PokemonInfo({
 								</div>
 							</div>
 						</TabsContent>
+						{/* Stats Charts and more */}
 						<TabsContent value="tab-2">
 							<StatsChart
 								pokemonDetails={pokemonDetails}
