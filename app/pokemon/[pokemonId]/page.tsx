@@ -24,12 +24,12 @@ export default function PokemonDetails({
 				<div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
 					<div className="container mx-auto px-4 py-6">
 						<div className="max-w-7xl flex items-center gap-5">
-							{/* Back button */}
+							{/* Back Button */}
 							<Link className="flex items-center  gap-1" href="/">
 								<ArrowLeft className="h-5 w-5" />
 								<div className="text-sm">Back</div>
 							</Link>
-							{/* Pokemon name and number */}
+							{/* Pokemon Name and Number */}
 							<div>
 								{isLoadingDetails ? (
 									<div className="flex gap-3">
@@ -72,7 +72,7 @@ export default function PokemonDetails({
 					</div>
 				</div>
 
-				{/* Card section */}
+				{/* Main Card Section */}
 				<div className="flex justify-center items-start px-3 py-6">
 					<PokemonInfoCard
 						pokemonId={params.pokemonId}

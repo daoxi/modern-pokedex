@@ -1,3 +1,5 @@
+// This is the main card that's used in the details page
+
 "use client";
 
 import { LoadingDetails } from "@/components/loading-details";
