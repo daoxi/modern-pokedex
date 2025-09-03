@@ -5,6 +5,7 @@
 import { LoadingDetails } from "@/components/loading-details";
 import { PokemonInfo } from "@/components/pokemon-info";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -13,7 +14,7 @@ import {
 	getTypeColor,
 } from "@/lib/pokemon-utils";
 import { Pokemon } from "@/types/pokemon";
-import { Loader } from "lucide-react";
+import { Loader, RefreshCw } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -41,6 +42,11 @@ export function PokemonInfoCard({
 	const handleImageError = () => {
 		setImageLoaded(true);
 		setImageError(true);
+	};
+
+	// For reloading page
+	const handleRetry = () => {
+		window.location.reload();
 	};
 
 	return (
@@ -88,11 +94,17 @@ export function PokemonInfoCard({
 					{isLoadingDetails ? (
 						<LoadingDetails />
 					) : !pokemonDetails ? (
-						<div>
-							⚠ Loading Pokémon details returned error
-							{errorDetails &&
-								errorDetails.message &&
-								": " + errorDetails.message}
+						<div className="flex flex-col justify-start items-center">
+							<div className="text-center">
+								⚠ Loading Pokémon details returned error
+								{errorDetails &&
+									errorDetails.message &&
+									": " + errorDetails.message}
+							</div>
+							<Button onClick={handleRetry} className="mt-4">
+								<RefreshCw className="mr-2 h-4 w-4" />
+								Try Again
+							</Button>
 						</div>
 					) : (
 						<div>
