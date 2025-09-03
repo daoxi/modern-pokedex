@@ -83,7 +83,13 @@ export function PokemonInfo({
 													</Badge>
 													<Badge
 														variant="outline"
-														style={ability.is_hidden ? {} : { display: "none" }}
+														style={
+															ability.is_hidden
+																? {}
+																: {
+																		display: "none",
+																  } /* Don't show this badge if the ability is not a "hidden" type */
+														}
 														className="text-xs"
 													>
 														Hidden

@@ -5,8 +5,8 @@ import { useAbilityDetails } from "@/hooks/use-ability-details";
 
 interface AbilityDescriptionProps {
 	abilityName: string;
-	isLoadingDetails: boolean;
-	errorDetails: any;
+	isLoadingDetails?: boolean;
+	errorDetails?: any;
 }
 
 export function AbilityDescription({
