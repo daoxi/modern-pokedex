@@ -1,6 +1,6 @@
 // For loading fallback background in pokemon detailed info card (not including the pokemon image)
 
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function LoadingDetails() {
 	return (

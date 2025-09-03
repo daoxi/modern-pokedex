@@ -1,7 +1,7 @@
 // For loading fallback background in enhanced preview section of pokemon cards
 // Used for both when the enhanced preview is being lazy loaded and when it's waiting for pokemon details to be fetched
 
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function LoadingPreview() {
 	return (

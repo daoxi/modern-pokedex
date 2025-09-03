@@ -31,8 +31,8 @@ export default function EnhancedPreview({ pokemonId }: EnhancedPreviewProps) {
 								pokemonDetails.types.map((type) => (
 									<Badge
 										key={
-											type.slot
-										} /* Mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 type */
+											type.type.name
+										} /* Each type name is unique, also mind the data structure returned by the PokeAPI. */
 										className="text-xs font-medium text-white px-3 py-1 transition-all duration-300 hover:scale-110"
 										style={{
 											backgroundColor: getTypeColor(type.type.name),
@@ -57,8 +57,8 @@ export default function EnhancedPreview({ pokemonId }: EnhancedPreviewProps) {
 										{pokemonDetails.abilities.slice(0, 2).map((ability) => (
 											<Badge
 												key={
-													ability.slot
-												} /* Mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 ability */
+													ability.ability.name
+												} /* Each ability name is unique, also mind the data structure returned by the PokeAPI. */
 												className="text-xs border-gray-300 text-gray-700 px-3 py-1 transition-all duration-300 hover:border-blue-400 hover:text-blue-600 truncate"
 												variant="outline"
 											>

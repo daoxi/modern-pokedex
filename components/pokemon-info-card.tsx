@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingDetails } from "@/components/loading-details";
 import { PokemonInfo } from "@/components/pokemon-info";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,7 +14,6 @@ import { Pokemon } from "@/types/pokemon";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { LoadingDetails } from "./loading-details";
 
 interface PokemonInfoCardProps {
 	pokemonId: number;
@@ -44,7 +44,7 @@ export function PokemonInfoCard({
 	return (
 		<>
 			<Card className="container max-w-5xl bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30">
-				<CardContent className="px-8 py-6 flex-col gap-1 justify-start items-center">
+				<CardContent className="px-6 py-6 flex-col gap-1 justify-start items-center">
 					{/* Pokemon Image */}
 					<div className="relative w-48 h-48 mx-auto mb-7">
 						{!imageLoaded && (
@@ -118,13 +118,13 @@ export function PokemonInfoCard({
 								</div>
 							</div>
 							{/* Pokemon Type(s) */}
-							<div className="flex justify-center items-center gap-3 mb-7">
+							<div className="flex justify-center items-center gap-3 mb-10">
 								{pokemonDetails.types &&
 									pokemonDetails.types.map((type) => (
 										<Badge
 											key={
-												type.slot
-											} /* Mind the data structure returned by the Pokemon API, each "slot" number is paird with 1 type */
+												type.type.name
+											} /* Each type name is unique, also mind the data structure returned by the PokeAPI. */
 											className="text-base font-medium text-white px-5 py-2"
 											style={{
 												backgroundColor: getTypeColor(type.type.name),

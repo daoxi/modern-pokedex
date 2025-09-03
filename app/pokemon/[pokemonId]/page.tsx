@@ -32,13 +32,20 @@ export default function PokemonDetails({
 							{/* Pokemon name and number */}
 							<div>
 								{isLoadingDetails ? (
-									<div className="text-muted-foreground">
-										Loading Pokémon...
+									<div className="flex gap-3">
+										<div
+											className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" /* Spinning animation */
+										></div>
+										<div
+											className="text-muted-foreground text-3xl" /* Same text size as pokemon name */
+										>
+											Loading...
+										</div>
 									</div>
 								) : pokemonDetails ? (
 									<div className="flex items-center gap-2">
 										<Zap className="h-6 w-6 text-yellow-500" />
-										<div className="flex items-end  gap-2">
+										<div className="flex items-end gap-2">
 											<div className="bg-gradient-to-r bg-clip-text text-transparent text-3xl font-bold from-blue-600 to-purple-600">
 												{pokemonDetails
 													? formatPokemonName(pokemonDetails.name)

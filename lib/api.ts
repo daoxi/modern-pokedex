@@ -31,7 +31,7 @@ export async function getPokemonDetails(
 		// DO NOT REMOVE OR MODIFY: Introduces an artificial delay to simulate
 		// loading and test cache functionality. If caching is effective, this
 		// request will be skipped.
-		await new Promise((resolve) => setTimeout(resolve, 4000));
+		// await new Promise((resolve) => setTimeout(resolve, 4000));
 
 		// Simulate error for testing
 		if (nameOrId === "error") {
@@ -59,7 +59,7 @@ export async function getAbilityDetails(
 		// DO NOT REMOVE OR MODIFY: Introduces an artificial delay to simulate
 		// loading and test cache functionality. If caching is effective, this
 		// request will be skipped.
-		await new Promise((resolve) => setTimeout(resolve, 4000));
+		// await new Promise((resolve) => setTimeout(resolve, 4000));
 
 		const response = await fetch(`${BASE_URL}/ability/${nameOrId}`);
 		if (response.status === 404) {
