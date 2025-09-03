@@ -11,7 +11,7 @@ export function LoadingDetails() {
 					length: 2 /* Use this to repeat components/elements n times for cleaner code */,
 				}).map((_, index) => (
 					<div key={index} className="flex justify-center">
-						<div className="flex flex-col justify-start items-center gap-3">
+						<div className="flex flex-col items-center gap-3">
 							<Skeleton className="h-6 w-16" />
 							<Skeleton className="h-8 w-24" />
 						</div>

@@ -52,7 +52,7 @@ export function PokemonInfoCard({
 	return (
 		<>
 			<Card className="container max-w-5xl bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30">
-				<CardContent className="px-6 py-6 flex-col gap-1 justify-start items-center">
+				<CardContent className="px-6 py-6 flex-col gap-1 items-center">
 					{/* Pokemon Image */}
 					<div className="relative w-48 h-48 mx-auto mb-7">
 						{!imageLoaded && (
@@ -94,7 +94,7 @@ export function PokemonInfoCard({
 					{isLoadingDetails ? (
 						<LoadingDetails />
 					) : !pokemonDetails ? (
-						<div className="flex flex-col justify-start items-center">
+						<div className="flex flex-col items-center">
 							<div className="text-center">
 								⚠ Loading Pokémon details returned error
 								{errorDetails &&
@@ -110,7 +110,7 @@ export function PokemonInfoCard({
 						<div>
 							{/* Pokemon Height and Weight */}
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-y-7 mb-7">
-								<div className="flex flex-col justify-start items-center">
+								<div className="flex flex-col items-center">
 									<div className="text-sm text-muted-foreground">Height</div>
 									<div className="text-2xl font-bold text-gray-800">
 										{
@@ -121,7 +121,7 @@ export function PokemonInfoCard({
 										m
 									</div>
 								</div>
-								<div className="flex flex-col justify-start items-center">
+								<div className="flex flex-col items-center">
 									<div className="text-sm text-muted-foreground">Weight</div>
 									<div className="text-2xl font-bold text-gray-800">
 										{
