@@ -88,7 +88,9 @@ export function PokemonInfoCard({
 					) : !pokemonDetails ? (
 						<div>
 							⚠ Loading Pokémon details returned error
-							{errorDetails.message && ": " + errorDetails.message}
+							{errorDetails &&
+								errorDetails.message &&
+								": " + errorDetails.message}
 						</div>
 					) : (
 						<div>

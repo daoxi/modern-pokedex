@@ -62,7 +62,9 @@ export default function PokemonDetails({
 								) : (
 									<div>
 										⚠ Loading Pokémon name returned error
-										{errorDetails.message && ": " + errorDetails.message}
+										{errorDetails &&
+											errorDetails.message &&
+											": " + errorDetails.message}
 									</div>
 								)}
 							</div>

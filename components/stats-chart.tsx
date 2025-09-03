@@ -167,10 +167,12 @@ export function StatsChart({
 												(payload[0].value as number) >
 												0 && "+"}
 											{
-												(((payload[1].value as number) -
-													(payload[0].value as number)) /
-													(payload[0].value as number)) *
-													100 /* convert for percentage display*/
+												Math.round(
+													(((payload[1].value as number) -
+														(payload[0].value as number)) /
+														(payload[0].value as number)) *
+														100
+												) /* convert for percentage display*/
 											}
 											{"%)"}
 										</div>

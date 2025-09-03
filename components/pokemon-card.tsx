@@ -63,7 +63,7 @@ export function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
 							/>
 						) : (
 							<div className="flex items-center justify-center h-full text-6xl">
-								🎯
+								⚠
 							</div>
 						)}
 					</div>
