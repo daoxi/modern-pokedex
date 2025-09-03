@@ -19,10 +19,15 @@ export function LoadingDetails() {
 				))}
 			</div>
 			{/* Pokemon Type(s) */}
-			<div className="flex justify-center items-center gap-3 mb-7">
-				<Skeleton className="h-8 w-24" />
+			<div className="flex justify-center items-center gap-3 mb-10">
+				<Skeleton className="h-10 w-24" />
 			</div>
-			{/* Pokemon Details and more */}
+			{/* Pokemon Details and Stats Charts (within Tabs) */}
+			{/* Tabs Control */}
+			<div className="flex justify-center items-center gap-3 mb-7">
+				<Skeleton className="h-8 w-full" />
+				<Skeleton className="h-8 w-full" />
+			</div>
 			{/* Pokemon Abilities */}
 			<div className="mb-7">
 				<div className="mb-4">
@@ -55,6 +60,7 @@ export function LoadingDetails() {
 					))}
 				</div>
 			</div>
+			{/* (Stats Charts are not first displayed when page loads/refreshes) */}
 		</div>
 	);
 }
