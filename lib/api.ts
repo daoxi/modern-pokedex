@@ -1,8 +1,13 @@
-import { Ability, Pokemon, PokemonListResponse } from "@/types/pokemon";
+import { Ability, Pokemon, PokemonListResponse, Type } from "@/types/pokemon";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
-export async function getPokemonList(limit: number = 151): Promise<Pokemon[]> {
+// Maximum number of pokemon, which is also used by other components
+export const maxPokemonNumber = 151;
+
+export async function getPokemonList(
+	limit: number = maxPokemonNumber
+): Promise<Pokemon[]> {
 	try {
 		const response = await fetch(`${BASE_URL}/pokemon?limit=${limit}`);
 		if (response.status === 404) {
@@ -71,6 +76,29 @@ export async function getAbilityDetails(
 		return response.json();
 	} catch (error) {
 		console.error("Error fetching ability details:", error);
+		throw error;
+	}
+}
+
+export async function getTypeDetails(
+	nameOrId: string | number
+): Promise<Type | null> {
+	try {
+		// (FOLLOWING THE PATTERN): Introduces an artificial delay to simulate
+		// loading and test cache functionality. If caching is effective, this
+		// request will be skipped.
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+
+		const response = await fetch(`${BASE_URL}/type/${nameOrId}`);
+		if (response.status === 404) {
+			return null;
+		}
+		if (!response.ok) {
+			throw new Error(`Failed to fetch type details: ${response.status}`);
+		}
+		return response.json();
+	} catch (error) {
+		console.error("Error fetching type details:", error);
 		throw error;
 	}
 }

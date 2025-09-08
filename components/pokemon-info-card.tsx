@@ -4,18 +4,27 @@
 
 import { LoadingDetails } from "@/components/loading-details";
 import { PokemonInfo } from "@/components/pokemon-info";
+import { PokemonTypeDetails } from "@/components/pokemon-type-details";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { maxPokemonNumber } from "@/lib/api";
 import {
 	formatPokemonName,
 	getPokemonImageUrl,
 	getTypeColor,
 } from "@/lib/pokemon-utils";
 import { Pokemon } from "@/types/pokemon";
-import { Loader, RefreshCw } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader, RefreshCw } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface PokemonInfoCardProps {
@@ -31,6 +40,8 @@ export function PokemonInfoCard({
 	isLoadingDetails,
 	errorDetails,
 }: PokemonInfoCardProps) {
+	const router = useRouter();
+
 	// Initialize and manage image load states
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const [imageError, setImageError] = useState(false);
@@ -49,46 +60,64 @@ export function PokemonInfoCard({
 		window.location.reload();
 	};
 
+	// For going to the previous/next pokemon
+	const handlePrevious = () => {
+		router.push(`/pokemon/${pokemonId * 1 - 1}`);
+	};
+	const handleNext = () => {
+		router.push(`/pokemon/${pokemonId * 1 + 1}`);
+	};
+
 	return (
 		<>
 			<Card className="container max-w-5xl bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30">
 				<CardContent className="px-6 py-6 flex-col gap-1 items-center">
-					{/* Pokemon Image */}
-					<div className="relative w-48 h-48 mx-auto mb-7">
-						{!imageLoaded && (
-							<>
-								<Skeleton className="absolute inset-0 rounded-full" />
-								<div className="flex items-center justify-center h-full">
-									<Loader className="h-12 w-12" />
-								</div>
-							</>
-						)}
-						<div
-							className={`absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full ${
-								imageLoaded && !imageError ? "opacity-100" : "opacity-0" // Only display background when image loaded successfully
-							}`}
+					<div className="flex justify-between items-center mb-7">
+						<ArrowLeft
+							onClick={() => handlePrevious()}
+							className={`${pokemonId <= 1 && "invisible"}`}
 						/>
-						{!imageError ? (
-							<Image
-								src={getPokemonImageUrl(pokemonId)} // Pokemon image can be loaded before pokemon details are ready, thanks to pokemon ID obtained from route parameters
-								alt={formatPokemonName(
-									pokemonDetails ? pokemonDetails.name : "pokemon"
-								)}
-								priority // Used for Largest Contentful Paint (LCP)
-								fill
-								sizes="(max-width: 475px) 100vw"
-								//unoptimized // Used if need to serve the image as-is (i.e. without converting)
-								className={`object-contain transition-all duration-300 ${
-									imageLoaded ? "opacity-100" : "opacity-0"
+						{/* Pokemon Image */}
+						<div className="relative w-48 h-48 mx-auto">
+							{!imageLoaded && (
+								<>
+									<Skeleton className="absolute inset-0 rounded-full" />
+									<div className="flex items-center justify-center h-full">
+										<Loader className="h-12 w-12" />
+									</div>
+								</>
+							)}
+							<div
+								className={`absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full ${
+									imageLoaded && !imageError ? "opacity-100" : "opacity-0" // Only display background when image loaded successfully
 								}`}
-								onLoad={handleImageLoad}
-								onError={handleImageError}
 							/>
-						) : (
-							<div className="flex items-center justify-center h-full gap-2">
-								<div>⚠ Failed to load Pokémon image</div>
-							</div>
-						)}
+							{!imageError ? (
+								<Image
+									src={getPokemonImageUrl(pokemonId)} // Pokemon image can be loaded before pokemon details are ready, thanks to pokemon ID obtained from route parameters
+									alt={formatPokemonName(
+										pokemonDetails ? pokemonDetails.name : "pokemon"
+									)}
+									priority // Used for Largest Contentful Paint (LCP)
+									fill
+									sizes="(max-width: 475px) 100vw"
+									//unoptimized // Used if need to serve the image as-is (i.e. without converting)
+									className={`object-contain transition-all duration-300 ${
+										imageLoaded ? "opacity-100" : "opacity-0"
+									}`}
+									onLoad={handleImageLoad}
+									onError={handleImageError}
+								/>
+							) : (
+								<div className="flex items-center justify-center h-full gap-2">
+									<div>⚠ Failed to load Pokémon image</div>
+								</div>
+							)}
+						</div>
+						<ArrowRight
+							onClick={() => handleNext()}
+							className={`${pokemonId >= maxPokemonNumber && "invisible"}`}
+						/>
 					</div>
 					{/* Pokemon Details and More */}
 					{isLoadingDetails ? (
@@ -133,21 +162,32 @@ export function PokemonInfoCard({
 									</div>
 								</div>
 							</div>
-							{/* Pokemon Type(s) */}
+							{/* Pokemon Type(s) with Tooltips */}
 							<div className="flex justify-center items-center gap-3 mb-10">
 								{pokemonDetails.types &&
 									pokemonDetails.types.map((type) => (
-										<Badge
+										<TooltipProvider
 											key={
 												type.type.name
 											} /* Each type name is unique, also mind the data structure returned by the PokeAPI. */
-											className="text-base font-medium text-white px-5 py-2"
-											style={{
-												backgroundColor: getTypeColor(type.type.name),
-											}}
 										>
-											{formatPokemonName(type.type.name)}
-										</Badge>
+											<Tooltip>
+												<TooltipTrigger>
+													<Badge
+														className="text-base font-medium text-white px-5 py-2 transition-all duration-100 hover:scale-110"
+														style={{
+															backgroundColor: getTypeColor(type.type.name),
+														}}
+													>
+														{formatPokemonName(type.type.name)}
+													</Badge>
+												</TooltipTrigger>
+												<TooltipContent className="px-3 py-4">
+													{/* Pokemon Type Details */}
+													<PokemonTypeDetails typeName={type.type.name} />
+												</TooltipContent>
+											</Tooltip>
+										</TooltipProvider>
 									))}
 							</div>
 							<PokemonInfo
