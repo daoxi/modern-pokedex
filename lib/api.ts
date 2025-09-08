@@ -2,7 +2,12 @@ import { Ability, Pokemon, PokemonListResponse, Type } from "@/types/pokemon";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
-export async function getPokemonList(limit: number = 151): Promise<Pokemon[]> {
+// Maximum number of pokemon, which is also used by other components
+export const maxPokemonNumber = 151;
+
+export async function getPokemonList(
+	limit: number = maxPokemonNumber
+): Promise<Pokemon[]> {
 	try {
 		const response = await fetch(`${BASE_URL}/pokemon?limit=${limit}`);
 		if (response.status === 404) {
