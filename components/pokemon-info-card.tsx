@@ -4,10 +4,17 @@
 
 import { LoadingDetails } from "@/components/loading-details";
 import { PokemonInfo } from "@/components/pokemon-info";
+import { PokemonTypeDetails } from "@/components/pokemon-type-details";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
 	formatPokemonName,
 	getPokemonImageUrl,
@@ -133,21 +140,32 @@ export function PokemonInfoCard({
 									</div>
 								</div>
 							</div>
-							{/* Pokemon Type(s) */}
+							{/* Pokemon Type(s) with Tooltips */}
 							<div className="flex justify-center items-center gap-3 mb-10">
 								{pokemonDetails.types &&
 									pokemonDetails.types.map((type) => (
-										<Badge
+										<TooltipProvider
 											key={
 												type.type.name
 											} /* Each type name is unique, also mind the data structure returned by the PokeAPI. */
-											className="text-base font-medium text-white px-5 py-2"
-											style={{
-												backgroundColor: getTypeColor(type.type.name),
-											}}
 										>
-											{formatPokemonName(type.type.name)}
-										</Badge>
+											<Tooltip>
+												<TooltipTrigger>
+													<Badge
+														className="text-base font-medium text-white px-5 py-2 transition-all duration-100 hover:scale-110"
+														style={{
+															backgroundColor: getTypeColor(type.type.name),
+														}}
+													>
+														{formatPokemonName(type.type.name)}
+													</Badge>
+												</TooltipTrigger>
+												<TooltipContent className="px-3 py-4">
+													{/* Pokemon Type Details */}
+													<PokemonTypeDetails typeName={type.type.name} />
+												</TooltipContent>
+											</Tooltip>
+										</TooltipProvider>
 									))}
 							</div>
 							<PokemonInfo
