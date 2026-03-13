@@ -32,7 +32,7 @@ export function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
 
 	return (
 		<Card
-			className="group transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 border-0 bg-white/90 backdrop-blur-sm overflow-hidden"
+			className="group transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 border-0 bg-white/90 backdrop-blur-sm overflow-hidden cursor-pointer"
 			onClick={onClick}
 		>
 			<CardContent className="p-6">
