@@ -33,10 +33,9 @@ export async function getPokemonDetails(
 	nameOrId: string | number
 ): Promise<Pokemon | null> {
 	try {
-		// DO NOT REMOVE OR MODIFY: Introduces an artificial delay to simulate
-		// loading and test cache functionality. If caching is effective, this
-		// request will be skipped.
-		await new Promise((resolve) => setTimeout(resolve, 4000));
+		// Adds an artificial delay to simulate loading and test cache functionality,
+		// if caching is effective, this request will be skipped.
+		// await new Promise((resolve) => setTimeout(resolve, 4000));
 
 		// Simulate error for testing
 		if (nameOrId === "error") {
@@ -61,10 +60,9 @@ export async function getAbilityDetails(
 	nameOrId: string | number
 ): Promise<Ability | null> {
 	try {
-		// DO NOT REMOVE OR MODIFY: Introduces an artificial delay to simulate
-		// loading and test cache functionality. If caching is effective, this
-		// request will be skipped.
-		await new Promise((resolve) => setTimeout(resolve, 4000));
+		// Adds an artificial delay to simulate loading and test cache functionality,
+		// if caching is effective, this request will be skipped.
+		// await new Promise((resolve) => setTimeout(resolve, 4000));
 
 		const response = await fetch(`${BASE_URL}/ability/${nameOrId}`);
 		if (response.status === 404) {
@@ -84,10 +82,9 @@ export async function getTypeDetails(
 	nameOrId: string | number
 ): Promise<Type | null> {
 	try {
-		// (FOLLOWING THE PATTERN): Introduces an artificial delay to simulate
-		// loading and test cache functionality. If caching is effective, this
-		// request will be skipped.
-		await new Promise((resolve) => setTimeout(resolve, 1000));
+		// Adds an artificial delay to simulate loading and test cache functionality,
+		// if caching is effective, this request will be skipped.
+		// await new Promise((resolve) => setTimeout(resolve, 1000));
 
 		const response = await fetch(`${BASE_URL}/type/${nameOrId}`);
 		if (response.status === 404) {

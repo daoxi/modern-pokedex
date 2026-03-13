@@ -75,7 +75,9 @@ export function PokemonInfoCard({
 					<div className="flex justify-between items-center mb-7">
 						<ArrowLeft
 							onClick={() => handlePrevious()}
-							className={`${pokemonId <= 1 && "invisible"}`}
+							className={`${
+								pokemonId <= 1 && "invisible"
+							} h-10 w-10 transition-all duration-100 hover:text-blue-600 cursor-pointer`}
 						/>
 						{/* Pokemon Image */}
 						<div className="relative w-48 h-48 mx-auto">
@@ -116,7 +118,9 @@ export function PokemonInfoCard({
 						</div>
 						<ArrowRight
 							onClick={() => handleNext()}
-							className={`${pokemonId >= maxPokemonNumber && "invisible"}`}
+							className={`${
+								pokemonId >= maxPokemonNumber && "invisible"
+							} h-10 w-10 transition-all duration-100 hover:text-blue-600 cursor-pointer`}
 						/>
 					</div>
 					{/* Pokemon Details and More */}
