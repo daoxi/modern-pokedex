@@ -16,6 +16,10 @@ A modern Pokédex web application built with Next.js, TypeScript, and Tailwind C
 
 ## 🛠️ Getting Started
 
+To check out the demo, visit the link provided on Github.
+
+To run it locally for development:
+
 1. **Install dependencies:**
 
    ```sh
